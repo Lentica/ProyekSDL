@@ -20,21 +20,34 @@ namespace ProyekSDL
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //buka file text
             OpenFileDialog fileOpener = new OpenFileDialog();
+
+            //set property dari openfiledialog
             fileOpener.DefaultExt = "txt";
             fileOpener.Title = "buka file test case";
             fileOpener.Filter = "text files (*.txt)|*.txt|All Files (*.*)|*.*";
             fileOpener.FilterIndex = 1;
             fileOpener.CheckFileExists = true;
             fileOpener.CheckPathExists = true;
+
+            //jalankan bila dialog telah selesai dibuka dan hasilnya adalah "OK"
             if (fileOpener.ShowDialog() == DialogResult.OK)
             {
+                //tunjukan path dari text file pada label
                 lblTestCase.Text = fileOpener.FileName;
+
+                //baca setiap line dari text file dan masukkan ke array
                 string[] testCaseLines = System.IO.File.ReadAllLines(@fileOpener.FileName);
+
+                //array untuk memisah command, key, value dari setiap line
                 string[] commands = new string[3];
+
+                //baca setiap line yg didapat dari text file dan
+                //lakukan split dari setiap line berdasarkan char whitespace
                 for (int i = 0; i < testCaseLines.Length; i++)
                 {
-                    commands = testCaseLines[i].Split(' ');
+                    commands = testCaseLines[i].Split(' ');//split berdasarkan whitespace
 
                     //operationModeSelector digunakan untuk memilih mode operasi
                     //yaitu mode avl tree atau red black tree
@@ -57,9 +70,9 @@ namespace ProyekSDL
             if (command == "I")
             {
                 //Insert
-                if (mode == "rbt")
+                if (mode == "rbt")//Red Black Tree
                     MessageBox.Show("rbt Insert to node with key: " + key + " the value: " + value);
-                else
+                else//AVL Tree
                     MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
             }
             else if (command == "U")
