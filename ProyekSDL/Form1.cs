@@ -12,7 +12,7 @@ namespace ProyekSDL
 {
     public partial class Form1 : Form
     {
-
+        AVLTree avl;
         public Form1()
         {
             InitializeComponent();
@@ -60,45 +60,81 @@ namespace ProyekSDL
                     else if (commands[0] == "T")//traverse
                         operationModeSelector(mode, commands[0]);
                     else
-                        operationModeSelector(mode, commands[0], commands[1], commands[2]);
+                        operationModeSelector(mode, commands[0], commands[1], int.Parse(commands[2]));
                 }
             }
         }
 
-        void operationModeSelector(string mode, string command, string key = "", string value = "")
+        void operationModeSelector(string mode, string command, string key = "", int value = 0)
         {
             if (command == "I")
             {
                 //Insert
-                if (mode == "rbt")//Red Black Tree
+                if (mode == "rbt")
+                {
+                    //Red Black Tree
                     MessageBox.Show("rbt Insert to node with key: " + key + " the value: " + value);
-                else//AVL Tree
+                }
+                else
+                {   //AVL Tree
                     MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
+                    avl.root = avl.insert(avl.root, value);
+                }
             }
             else if (command == "U")
             {
                 //Update
-                if(mode=="rbt")
+                if (mode == "rbt")
+                {
                     MessageBox.Show("rbt Update node with key: " + key + " with the value: " + value);
+                }
                 else
+                {
                     MessageBox.Show("avl Update node with key: " + key + " with the value: " + value);
+                }
             }
             else if (command == "D")
             {
                 //Delete
-                if(mode=="rbt")
+                if (mode == "rbt")
+                {
                     MessageBox.Show("rbt Delete node with key: " + key);
+                }
                 else
+                {
                     MessageBox.Show("avl Delete node with key: " + key);
+                }
             }
             else if (command == "T")
             {
                 //Traverse
-                if(mode=="rbt")
+                if (mode == "rbt")
+                {
                     MessageBox.Show("RBT WARP MODE ON! STARTING TRAVERSAL! ");
+                }
                 else
+                {
                     MessageBox.Show("AVL WARP MODE ON! STARTING TRAVERSAL! ");
+                    preOrder(avl.root);
+                    rtbDisplay.Text += "\n";
+                }
             }
+        }
+
+        //traverse pre order AVL
+        void preOrder(Node node)
+        {
+            if (node != null)
+            {
+                rtbDisplay.Text += node.key + " ";
+                preOrder(node.left);
+                preOrder(node.right);
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            avl = new AVLTree();
         }
     }
 }
