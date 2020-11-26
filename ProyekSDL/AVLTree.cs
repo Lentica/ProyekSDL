@@ -75,17 +75,17 @@ namespace ProyekSDL
         }
 
         //insert
-        public Node insert(Node node, int key)
+        public Node insert(Node node, int key, string val)
         {
 
             //BST insert
             if (node == null)
-                return (new Node(key));
+                return (new Node(key, val));
 
             if (key < node.key)
-                node.left = insert(node.left, key);
+                node.left = insert(node.left, key, val);
             else if (key > node.key)
-                node.right = insert(node.right, key);
+                node.right = insert(node.right, key, val);
             else //no duplicate keys 
                 return node;
 

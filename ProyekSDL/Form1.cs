@@ -56,16 +56,16 @@ namespace ProyekSDL
                     string mode = cbMode.Text;//mode diambil dari comboBox cbMode
 
                     if (commands[0] == "D")//delete
-                        operationModeSelector(mode, commands[0], commands[1]);
+                        operationModeSelector(mode, commands[0], int.Parse(commands[1]));
                     else if (commands[0] == "T")//traverse
                         operationModeSelector(mode, commands[0]);
                     else
-                        operationModeSelector(mode, commands[0], commands[1], int.Parse(commands[2]));
+                        operationModeSelector(mode, commands[0], int.Parse(commands[1]), commands[2]);
                 }
             }
         }
 
-        void operationModeSelector(string mode, string command, string key = "", int value = 0)
+        void operationModeSelector(string mode, string command, int key=0, string value = "")
         {
             if (command == "I")
             {
@@ -78,7 +78,7 @@ namespace ProyekSDL
                 else
                 {   //AVL Tree
                     MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
-                    avl.root = avl.insert(avl.root, value);
+                    avl.root = avl.insert(avl.root, key, value);
                 }
             }
             else if (command == "U")
@@ -114,8 +114,9 @@ namespace ProyekSDL
                 }
                 else
                 {
+                    rtbDisplay.Clear();
                     MessageBox.Show("AVL WARP MODE ON! STARTING TRAVERSAL! ");
-                    preOrder(avl.root);
+                    inOrder(avl.root);
                     rtbDisplay.Text += "\n";
                 }
             }
@@ -126,9 +127,27 @@ namespace ProyekSDL
         {
             if (node != null)
             {
-                rtbDisplay.Text += node.key + " ";
+                rtbDisplay.Text += "key: "+node.key + " value: "+node.value+" / ";
                 preOrder(node.left);
                 preOrder(node.right);
+            }
+        }
+        void inOrder(Node node)
+        {
+            if (node != null)
+            {
+                inOrder(node.left);
+                rtbDisplay.Text += "key: " + node.key + " value: " + node.value + " / ";
+                inOrder(node.right);
+            }
+        }
+        void postOrder(Node node)
+        {
+            if (node != null)
+            {
+                postOrder(node.left);
+                postOrder(node.right);
+                rtbDisplay.Text += "key: " + node.key + " value: " + node.value + " / ";
             }
         }
 

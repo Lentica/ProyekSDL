@@ -9,12 +9,14 @@ namespace ProyekSDL
     class Node
     {
         public int key, height;
+        public string value;
         public Node left, right;
 
-        public Node(int d)
+        public Node(int d, string val="")
         {
             key = d;
             height = 1;
+            value = val;
         }
     }
 }
