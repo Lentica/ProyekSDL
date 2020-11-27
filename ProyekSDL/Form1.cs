@@ -77,7 +77,8 @@ namespace ProyekSDL
                 }
                 else
                 {   //AVL Tree
-                    MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
+                    //MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
+                    rtbDisplay.Text += "avl Insert to node with key: " + key + " the value: " + value+"\n";
                     avl.root = avl.insert(avl.root, key, value);
                 }
             }
@@ -114,20 +115,21 @@ namespace ProyekSDL
                 }
                 else
                 {
-                    rtbDisplay.Clear();
-                    MessageBox.Show("AVL WARP MODE ON! STARTING TRAVERSAL! ");
-                    inOrder(avl.root);
                     rtbDisplay.Text += "\n";
+                    MessageBox.Show("AVL WARP MODE ON! STARTING TRAVERSAL! ");
+                    rtbDisplay.Text += "In-Order Traversal Result: \n\n";
+                    inOrder(avl.root);
+                    rtbDisplay.Text += "\n\n\n";
                 }
             }
         }
 
-        //traverse pre order AVL
+        //traverse AVL
         void preOrder(Node node)
         {
             if (node != null)
             {
-                rtbDisplay.Text += "key: "+node.key + " value: "+node.value+" / ";
+                rtbDisplay.Text += "key: "+node.key + " value: "+node.value+" // ";
                 preOrder(node.left);
                 preOrder(node.right);
             }
@@ -137,7 +139,7 @@ namespace ProyekSDL
             if (node != null)
             {
                 inOrder(node.left);
-                rtbDisplay.Text += "key: " + node.key + " value: " + node.value + " / ";
+                rtbDisplay.Text += "key: " + node.key + " ++ value: " + node.value + " || ";
                 inOrder(node.right);
             }
         }
@@ -147,13 +149,18 @@ namespace ProyekSDL
             {
                 postOrder(node.left);
                 postOrder(node.right);
-                rtbDisplay.Text += "key: " + node.key + " value: " + node.value + " / ";
+                rtbDisplay.Text += "key: " + node.key + " value: " + node.value + " // ";
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             avl = new AVLTree();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            rtbDisplay.Clear();
         }
     }
 }

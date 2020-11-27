@@ -123,13 +123,5 @@ namespace ProyekSDL
             //return node pointer
             return node;
         }
-        public void preOrder(Node node)
-        {
-            if (node != null)
-            {
-                preOrder(node.left);
-                preOrder(node.right);
-            }
-        }
     }
 }
