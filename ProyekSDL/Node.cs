@@ -11,14 +11,12 @@ namespace ProyekSDL
         public int key, height;
         public string value;
         public Node left, right;
-        public int testCommit;
 
         public Node(int d, string val="")
         {
             key = d;
             height = 1;
             value = val;
-            testCommit = 0;
         }
     }
 }
