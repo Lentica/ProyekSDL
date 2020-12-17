@@ -8,7 +8,6 @@ namespace ProyekSDL
 {
     class NodeRBT
     {
-        int text;
         int data;
         NodeRBT parent;
         NodeRBT root;
