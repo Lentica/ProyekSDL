@@ -75,13 +75,18 @@ namespace ProyekSDL
                 if (mode == "rbt")
                 {
                     //Red Black Tree
-                    MessageBox.Show("rbt Insert to node with key: " + key + " the value: " + value);
+                    MessageBox.Show("rbt Insert to node with ***key: " + key + "*** the value: " + value);
                 }
                 else
                 {   //AVL Tree
                     //MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
-                    rtbDisplay.Text += "avl Insert to node with key: " + key + " the value: " + value+"\n";
+                    rtbDisplay.Text += "avl Insert node with key: ***" + key + "*** the value: " + value+"\n\n";
                     avl.root = avl.insert(avl.root, key, value);
+                    avl.status += "+++-----------------------------------------------------+++";
+                    rtbDisplay.Text += avl.status + "\n\n";
+                    avl.status = "";
+                    //rtbDisplay.Text += statusAVL + "\n";
+
                 }
             }
             else if (command == "U")
@@ -127,13 +132,16 @@ namespace ProyekSDL
                 {
                     //AVL Tree
                     //MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
-                    rtbDisplay.Text += "avl delete to node with key: " + key + "\n";
-                    Node res = avl.delete(avl.root, key);
-                    if(res == null) { rtbDisplay.Text += "key not found" + "\n"; }
-                    else
-                    {
-                        rtbDisplay.Text += "node deleted" + "\n";
-                    }
+                    rtbDisplay.Text += "avl delete node with key: " + key + "\n";
+                    avl.root = avl.deleteNode(avl.root, key);
+
+
+                    //Node res = avl.delete(avl.root, key);
+                    //if(res == null) { rtbDisplay.Text += "key not found" + "\n"; }
+                    //else
+                    //{
+                    //    rtbDisplay.Text += "node deleted" + "\n";
+                    //}
                 }
             }
             else if (command == "T")
