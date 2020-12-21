@@ -248,10 +248,12 @@ namespace ProyekSDL
                 }
                 if (key < temp.data)
                 {
+                    status+=" Turun ke kiri \n\n";
                     temp = temp.left;
                 }
                 if (key > temp.data)
                 {
+                    status+=" Turun ke kanan \n\n";
                     temp = temp.right;
                 }
                 if (key == temp.data)
