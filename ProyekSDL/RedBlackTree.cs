@@ -359,7 +359,7 @@ namespace ProyekSDL
 
                 if (Y.parent == null)
                 {
-                    root = X;
+                    item.root = X;
                 }
                 else if (Y == Y.parent.left)
                 {
@@ -406,7 +406,7 @@ namespace ProyekSDL
                             W.color = 0;
                             X = X.parent;
                         }
-                        else if (W.right.color == 1&&W.right!=null)
+                        else if (W.right.color == 1)
                         {
                             W.left.color = 1;
                             W.color = 0;
