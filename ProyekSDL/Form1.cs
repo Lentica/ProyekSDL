@@ -13,7 +13,7 @@ namespace ProyekSDL
     public partial class Form1 : Form
     {
         AVLTree avl;
-        NodeR rbt = new NodeR(1, "");
+        NodeR rbt;
         public Form1()
         {
             InitializeComponent();
@@ -77,7 +77,8 @@ namespace ProyekSDL
                 if (mode == "rbt")
                 {
                     //Red Black Tree
-                    rtbDisplay.Text += "rbt Insert to node with ***key: " + key + "*** the value: " + value;
+                    MessageBox.Show("rbt Insert to node with ***key: " + key + "*** the value: " + value);
+                    rbt = new NodeR(key, value);
                     rbt.root = rbt.insert(rbt.root, key, value);
                     rbt.status += "+++-----------------------------------------------------+++";
                     rtbDisplay.Text += rbt.status + "\n\n";
@@ -114,7 +115,11 @@ namespace ProyekSDL
                 //Search
                 if (mode == "rbt")
                 {
-                    MessageBox.Show("rbt find node with key: " + key);
+                    MessageBox.Show("rbt find node with key: " + key + "\n\n");
+                    rbt.Find(rbt.root, key);
+                    rbt.status += "+++-----------------------------------------------------+++";
+                    rtbDisplay.Text += rbt.status + "\n\n";
+                    rbt.status = "";
                 }
                 else
                 {
@@ -139,7 +144,11 @@ namespace ProyekSDL
                 //Delete
                 if (mode == "rbt")
                 {
-                    MessageBox.Show("rbt Delete node with key: " + key);
+                    MessageBox.Show("rbt Delete node with key: " + key + "\n\n");
+                    rbt.Delete(rbt.root, key);
+                    rbt.status += "+++-----------------------------------------------------+++";
+                    rtbDisplay.Text += rbt.status + "\n\n";
+                    rbt.status = "";
                 }
                 else
                 {

@@ -222,6 +222,280 @@ namespace ProyekSDL
             leftRotateInsert(root.left);
             rightRotateInsert(root);
         }
+    
+        public NodeR Find(NodeR root,int key)
+        {
+            bool isFound = false;
+            NodeR temp=root;
+            NodeR item = null;
+            while (!isFound)
+            {
+                if (temp == null)
+                {
+                    break;
+                }
+                if (key < temp.data)
+                {
+                    temp = temp.left;
+                }
+                if (key > temp.data)
+                {
+                    temp = temp.right;
+                }
+                if (key == temp.data)
+                {
+                    isFound = true;
+                    item = root;
+                }
+            }
+            if (isFound)
+            {
+                status+=key+" was found " + "\n\n";
+                return item;
+            }
+            else
+            {
+                status+=key + " was not found " + "\n\n";
+                return item;
+            }
+        }
+
+        public void Delete(NodeR root,int key)
+        {
+            NodeR item = Find(root,key);
+            NodeR X = null;
+            NodeR Y = null;
+
+            if (item == null)
+            {
+                status+=" Nothing to delete! " + "\n\n";
+                return;
+            }
+
+            if (root.left == null || root.right == null)
+            {
+                Y = item;
+            }
+            else
+            {
+                Y = TreeSuccessor(item);
+            }
+
+            if (Y.left != null)
+            {
+                X = Y.left;
+            }
+            else
+            {
+                X = Y.right;
+            }
+
+            if (X != null)
+            {
+                X.parent = Y;
+            }
+
+            if (Y.parent == null)
+            {
+                root = X;
+            }
+            else if (Y == Y.parent.left)
+            {
+                Y.parent.left = X;
+            }
+            else
+            {
+                Y.parent.left = X;
+            }
+
+            if (Y != item)
+            {
+                item.data = Y.data;
+            }
+            if (Y.color == 1)
+            {
+                status += " Node Deleted" + "\n\n";
+                DeleteFixUp(X);
+            }
+
+        }
+    
+        private void DeleteFixUp(NodeR X)
+        {
+
+            while (X != null && X != root && X.color == 1)
+            {
+
+                if (X == X.parent.left)
+                {
+
+                    NodeR W = X.parent.right;
+
+                    if (W.color == 0)
+                    {
+                        W.color = 1;
+                        X.parent.color = 0;
+                        LeftRotate(X.parent);
+                        W = X.parent.right;
+                    }
+
+                    if (W.left.color == 1 && W.right.color == 1)
+                    {
+                        W.color = 0;
+                        X = X.parent;
+                    }
+                    else if (W.right.color == 1)
+                    {
+                        W.left.color = 1;
+                        W.color = 0;
+                        RightRotate(W);
+                        W = X.parent.right;
+                    }
+
+                    W.color = X.parent.color;
+                    X.parent.color = 1;
+                    W.right.color = 1;
+                    LeftRotate(X.parent);
+                    X = root;
+                }
+                else
+                {
+
+                    NodeR W = X.parent.left;
+
+                    if (W.color == 0)
+                    {
+                        W.color = 1;
+                        X.parent.color = 0;
+                        RightRotate(X.parent);
+                        W = X.parent.left;
+                    }
+
+                    if (W.right.color == 1 && W.left.color == 1)
+                    {
+                        W.color = 1;
+                        X = X.parent;
+                    }
+                    else if (W.left.color == 1)
+                    {
+                        W.right.color = 1;
+                        W.color = 0;
+                        LeftRotate(W);
+                        W = X.parent.left;
+                    }
+
+                    W.color = X.parent.color;
+                    X.parent.color = 1;
+                    W.left.color = 1;
+                    RightRotate(X.parent);
+                    X = root;
+                }
+            }
+            if (X != null)
+                X.color = 1;
+        }
+
+        private NodeR Minimum(NodeR X)
+        {
+
+            while (X.left.left != null)
+            {
+                X = X.left;
+            }
+
+            if (X.left.right != null)
+            {
+                X = X.left.right;
+            }
+
+            return X;
+        }
+
+        private NodeR TreeSuccessor(NodeR X)
+        {
+
+            if (X.left != null)
+            {
+
+                return Minimum(X);
+
+            }
+            else
+            {
+                NodeR Y = X.parent;
+                while (Y != null && X == Y.right)
+                {
+                    X = Y;
+                    Y = Y.parent;
+                }
+
+                return Y;
+            }
+        }
+    
+        private void LeftRotate(NodeR X)
+        {
+            NodeR Y = X.right;
+            X.right = Y.left;
+            if (Y.left != null)
+            {
+                Y.left.parent = X;
+            }
+            if (Y != null)
+            {
+                Y.parent = X.parent;
+            }
+            if (X.parent == null)
+            {
+                root = Y;
+            }
+            if (X == X.parent.left)
+            {
+                X.parent.left = Y;
+            }
+            else
+            {
+                X.parent.right = Y;
+            }
+            Y.left = X;
+            if (X != null)
+            {
+                X.parent = Y;
+            }
+
+        }
+
+        private void RightRotate(NodeR Y)
+        {
+            NodeR X = Y.left;
+            Y.left = X.right;
+            if (X.right != null)
+            {
+                X.right.parent = Y;
+            }
+            if (X != null)
+            {
+                X.parent = Y.parent;
+            }
+            if (Y.parent == null)
+            {
+                root = X;
+            }
+            if (Y == Y.parent.right)
+            {
+                Y.parent.right = X;
+            }
+            if (Y == Y.parent.left)
+            {
+                Y.parent.left = X;
+            }
+
+            X.right = Y;
+            if (Y != null)
+            {
+                Y.parent = X;
+            }
+        }
     }
     class Tree
     {
