@@ -39,7 +39,7 @@ namespace ProyekSDL
             }
             else if (key < root.data)
             {
-                
+                //System.Windows.Forms.MessageBox.Show(root.data.ToString());
                 status += " key " + key + " less than current node: " + root.data + ", going left \n\n";
                 root.left = insert(root.left, key, val, "Left", root.data);
                 root.left.parent = root;
@@ -105,7 +105,7 @@ namespace ProyekSDL
             else if (key > root.data)
             {
                 // Lebih Besar
-                
+                //System.Windows.Forms.MessageBox.Show(root.data.ToString());
                 status += " key " + key + " larger than current node: " + root.data + ", going right \n\n";
                 root.right = insert(root.right, key, val, "Right" , root.data);
                 root.right.parent = root;
@@ -210,7 +210,6 @@ namespace ProyekSDL
                 temp.left = root;
                 root = temp;
                 status += " Left Rotate \n\n";
-                
             }
             
             
@@ -234,7 +233,6 @@ namespace ProyekSDL
                 temp.right = root;
                 root = temp;
                 status += " Right Rotate \n\n";
-                
             }
                 
         }
@@ -244,7 +242,6 @@ namespace ProyekSDL
             rightRotateInsert(root.right);
             leftRotateInsert(root);
             status += " Double Left Rotate \n\n";
-            
         }
 
         public void doubleRightRotateInsert(NodeR root)
@@ -252,7 +249,6 @@ namespace ProyekSDL
             leftRotateInsert(root.left);
             rightRotateInsert(root);
             status += " Double Right Rotate \n\n";
-            
         }
     
         public NodeR Find(int key)
