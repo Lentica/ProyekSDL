@@ -30,6 +30,7 @@ namespace ProyekSDL
         //Right rotate
         public Node rightRotate(Node y)
         {
+            status += "rotating nodes...\n\n";
             Node x = y.left;
             Node T2 = x.right;
 
@@ -50,6 +51,7 @@ namespace ProyekSDL
         //Left rotates
         public Node leftRotate(Node x)
         {
+            status += "rotating nodes...\n\n";
             Node y = x.right;
             Node T2 = y.left;
 
@@ -217,6 +219,15 @@ namespace ProyekSDL
                 status += " key is a duplicate!  \n\n";
                 return node;
             }
+            if (node.left!=null)
+            {
+                status += "left child of node " + node.key + " is now: " + node.left.key + "\n\n";
+            }
+            if (node.right!=null)
+            {
+                status += "right child of node " + node.key + " is now: " + node.right.key + "\n\n";
+            }
+
 
 
             //update height of node ancestor
@@ -230,20 +241,20 @@ namespace ProyekSDL
             //Left Left Case  
             if (balance > 1 && key < node.left.key)
             {
-                status += " balance factor is: " + balance + "\n\n";
+                status += " balance factor of "+node.key+" is: " + balance + "\n\n";
                 status += " left left case -> right rotate! \n\n"; return rightRotate(node);
             }
             // Right Right Case  
             if (balance < -1 && key > node.right.key)
             {
-                status += " balance factor is: " + balance + "\n\n";
+                status += " balance factor of " + node.key + " is: " + balance + "\n\n";
                 status += " right right case <- left rotate! \n\n"; return leftRotate(node);
             }
 
             // Left Right Case  
             if (balance > 1 && key > node.left.key)
             {
-                status += " balance factor is: " + balance + "\n\n";
+                status += " balance factor of " + node.key + " is: " + balance + "\n\n";
                 status += " left right case <<- double left rotate! \n\n";
                 node.left = leftRotate(node.left);
                 return rightRotate(node);
@@ -252,7 +263,7 @@ namespace ProyekSDL
             // Right Left Case  
             if (balance < -1 && key < node.right.key)
             {
-                status += " balance factor is: " + balance + "\n\n";
+                status += " balance factor of " + node.key + " is: " + balance + "\n\n";
                 status += " right left case ->> double right rotate! \n\n";
                 node.right = rightRotate(node.right);
                 return leftRotate(node);
@@ -313,12 +324,14 @@ namespace ProyekSDL
                         status += "node with key: " + key + " has no child \n\n";
                         temp = root;
                         root = null;
+                        status += "deleted node..\n\n";
                     }
                     // one child case  
                     else
                     {
                         status += "node with key: " + key + " only has one child \n\n";
                         root = temp; // copy non empty child
+                        status += "replaced node with child node..\n\n";
                     }
                 }
                 // node with two children. get inorder successor

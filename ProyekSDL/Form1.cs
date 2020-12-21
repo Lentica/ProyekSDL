@@ -91,6 +91,7 @@ namespace ProyekSDL
                     avl.root = avl.insert(avl.root, key, value);
                     avl.status += "+++-----------------------------------------------------+++";
                     rtbDisplay.Text += avl.status + "\n\n";
+                    rtbDisplay.Text += "root of avl tree is now: "+avl.root.key + "\n\n";
                     avl.status = "";
                     //rtbDisplay.Text += statusAVL + "\n";
 
@@ -104,11 +105,17 @@ namespace ProyekSDL
                     //MessageBox.Show("rbt Update node with key: " + key + " with the value: " + value);
                     rtbDisplay.Text += "rbt Update node with key: " + key + " with the value: " + value;
                     rbt.update(rbt.root, key, value);
+                    rbt.status += "+++-----------------------------------------------------+++";
+                    rtbDisplay.Text += rbt.status + "\n\n";
+                    rbt.status = "";
                 }
                 else
                 {
                     rtbDisplay.Text+="avl Update node with key: " + key + " with the value: " + value;
                     avl.updateNode(avl.root, key, value);
+                    avl.status += "+++-----------------------------------------------------+++";
+                    rtbDisplay.Text += avl.status + "\n\n";
+                    avl.status = "";
                 }
             }
             else if(command == "F")
@@ -157,7 +164,7 @@ namespace ProyekSDL
                     //MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
                     rtbDisplay.Text += "avl delete node with key: " + key + "\n";
                     avl.root = avl.deleteNode(avl.root, key);
-                    avl.status += "+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+";
+                    avl.status += "+++_____________________________________________________+++";
                     rtbDisplay.Text += avl.status + "\n\n";
                     avl.status = "";
 
@@ -176,7 +183,7 @@ namespace ProyekSDL
                 if (mode == "rbt")
                 {
                     rtbDisplay.Text += "\n";
-                    MessageBox.Show("RBT WARP MODE ON! STARTING TRAVERSAL! ");
+                    //MessageBox.Show("RBT WARP MODE ON! STARTING TRAVERSAL! ");
                     rtbDisplay.Text += "In-Order Traversal Result: \n\n";
                     inOrderRBT(rbt.root);
                     rtbDisplay.Text += "\n\n\n";
@@ -184,13 +191,13 @@ namespace ProyekSDL
                 else
                 {
                     rtbDisplay.Text += "\n";
-                    MessageBox.Show("AVL WARP MODE ON! STARTING TRAVERSAL! ");
+                    //MessageBox.Show("AVL WARP MODE ON! STARTING TRAVERSAL! ");
                     rtbDisplay.Text += "In-Order Traversal Result: \n\n";
                     inOrder(avl.root);
                     rtbDisplay.Text += "\n\n\n";
 
                     rtbDisplay.Text += "\n";
-                    MessageBox.Show("AVL WARP MODE ON! STARTING TRAVERSAL! ");
+                    //MessageBox.Show("AVL WARP MODE ON! STARTING TRAVERSAL! ");
                     rtbDisplay.Text += "Pre-Order Traversal Result: \n\n";
                     preOrder(avl.root);
                     rtbDisplay.Text += "\n\n\n";
