@@ -101,7 +101,9 @@ namespace ProyekSDL
                 //Update
                 if (mode == "rbt")
                 {
-                    MessageBox.Show("rbt Update node with key: " + key + " with the value: " + value);
+                    //MessageBox.Show("rbt Update node with key: " + key + " with the value: " + value);
+                    rtbDisplay.Text += "rbt Update node with key: " + key + " with the value: " + value;
+                    rbt.update(rbt.root, key, value);
                 }
                 else
                 {
@@ -173,7 +175,11 @@ namespace ProyekSDL
                 //Traverse
                 if (mode == "rbt")
                 {
+                    rtbDisplay.Text += "\n";
                     MessageBox.Show("RBT WARP MODE ON! STARTING TRAVERSAL! ");
+                    rtbDisplay.Text += "In-Order Traversal Result: \n\n";
+                    inOrderRBT(rbt.root);
+                    rtbDisplay.Text += "\n\n\n";
                 }
                 else
                 {
@@ -218,6 +224,15 @@ namespace ProyekSDL
                 postOrder(node.left);
                 postOrder(node.right);
                 rtbDisplay.Text += "key: " + node.key + " value: " + node.value + " // ";
+            }
+        }
+        void inOrderRBT(NodeR node)
+        {
+            if (node != null)
+            {
+                inOrderRBT(node.left);
+                rtbDisplay.Text += "key: " + node.data + " ++ value: " + node.value + " || ";
+                inOrderRBT(node.right);
             }
         }
 
