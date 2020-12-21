@@ -56,6 +56,7 @@ namespace ProyekSDL
                         if (root.parent.left == null)
                         {
                             leftRotateInsert(root.parent);
+                            status += "Left Rotate \n\n";
                         }
                         else if (root.parent.left.color == root.color)
                         {
@@ -72,6 +73,7 @@ namespace ProyekSDL
                             doubleLeftRotateInsert(root.parent);
                             recolorInsert(root);
                             recolorInsert(root.left);
+                            status += " Double Left Rotate \n\n";
                         }
                     }
                     else
@@ -79,9 +81,11 @@ namespace ProyekSDL
                         if (root.parent.right == null)
                         {
                             rightRotateInsert(root.parent);
+                            status += " Right Rotate \n\n";
                         }
                         else if (root.parent.right.color == root.color)
                         {
+                            status += "Recolor \n\n";
                             recolorInsert(root.parent);
                             recolorInsert(root.parent.left);
                             recolorInsert(root.parent.right);
@@ -93,6 +97,7 @@ namespace ProyekSDL
                             rightRotateInsert(root.parent);
                             recolorInsert(root);
                             recolorInsert(root.right);
+                            status += "Right Rotate \n\n";
                         }
 
                     }
@@ -116,6 +121,7 @@ namespace ProyekSDL
                         if (root.parent.right == null)
                         {
                             rightRotateInsert(root.parent);
+                            status += "Right Rotate \n\n";
                         }
                         else if (root.parent.right.color == root.color)
                         {
@@ -124,6 +130,7 @@ namespace ProyekSDL
                             recolorInsert(root.parent.left);
                             recolorInsert(root.parent.right);
                             recolorInsert(root.right);
+                            status += "Recolor \n\n";
                         }
                         else
                         {
@@ -131,6 +138,7 @@ namespace ProyekSDL
                             doubleRightRotateInsert(root.parent);
                             recolorInsert(root);
                             recolorInsert(root.right);
+                            status += "Double Right Rotate \n\n";
                         }
                     }
                     else
@@ -138,6 +146,7 @@ namespace ProyekSDL
                         if (root.parent.left == null)
                         {
                             leftRotateInsert(root.parent);
+                            status += "Left Rotate \n\n";
                         }
                         else if (root.parent.left.color == root.color)
                         {
@@ -145,6 +154,7 @@ namespace ProyekSDL
                             recolorInsert(root.parent.left);
                             recolorInsert(root.parent.right);
                             recolorInsert(root.right);
+                            status += "Recolor \n\n";
                         }
                         else
                         {
@@ -152,6 +162,7 @@ namespace ProyekSDL
                             leftRotateInsert(root.parent);
                             recolorInsert(root);
                             recolorInsert(root.left);
+                            status += "Left Rotate \n\n";
                         }
 
                     }
@@ -206,7 +217,11 @@ namespace ProyekSDL
         public void leftRotateInsert(NodeR root)
         {
             NodeR temp;
-            if (root.left == null)
+            if (root == null)
+            {
+
+            }
+            else if (root.left == null)
             {
 
             }
