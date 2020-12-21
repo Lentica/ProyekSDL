@@ -484,7 +484,6 @@ namespace ProyekSDL
 
             if (X.left != null)
             {
-                status+= Minimum(X).data+" adalah successor";
                 return Minimum(X);
 
             }
@@ -496,7 +495,6 @@ namespace ProyekSDL
                     X = Y;
                     Y = Y.parent;
                 }
-                status+=Y.data+" adalah successor \n\n";
                 return Y;
             }
         }
