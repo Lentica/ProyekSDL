@@ -326,11 +326,13 @@ namespace ProyekSDL
                 else if(item.left!=null)
                 {
                     status+=item.data+" memiliki anak kiri \n\n";
+                    status+=item.left.data+" menggantikan posisi "+item.data+"\n\n";
                     status+="Node deleted "+item.data+" \n\n";
                 }
                 else if(item.right!=null)    
                 {
                     status+=item.data+" memiliki anak kanan \n\n";
+                    status+=item.right.data+" menggantikan posisi "+item.data+"\n\n";
                     status+="Node deleted "+item.data+" \n\n";
                 }
 
