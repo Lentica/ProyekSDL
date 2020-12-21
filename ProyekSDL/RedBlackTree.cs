@@ -250,12 +250,12 @@ namespace ProyekSDL
                 {
                     if (key < temp.data)
                     {
-                    status+=" Turun ke kiri \n\n";
+                    status+=key +" lebih kecil dari "+temp.data+" turun ke kiri \n\n";
                     temp = temp.left;
                     }
                     else if (key > temp.data)
                     {
-                    status+=" Turun ke kanan \n\n";
+                    status+=key+" lebih besar dari "+temp.data+" turun ke kanan \n\n";
                     temp = temp.right;
                     }
                     else if (key == temp.data)
@@ -378,11 +378,7 @@ namespace ProyekSDL
                 {
 
                     NodeR W = X.parent.left;
-
-                    if(W==null)
-                    {
-                        return;
-                    }
+                    
                     if (W.color == 0)
                     {
                         W.color = 1;
@@ -412,7 +408,10 @@ namespace ProyekSDL
                 }
             }
             if (X != null)
+            {
                 X.color = 1;
+            }
+                
         }
 
         private NodeR Minimum(NodeR X)
