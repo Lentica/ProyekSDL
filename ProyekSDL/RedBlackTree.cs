@@ -306,7 +306,7 @@ namespace ProyekSDL
             {
                 if(item.left==null&&item.right==null)
                 {                    
-                    status+=item.data+" tidak memiliki anak dan berwarna Merah \n\n";
+                    status+=item.data+" tidak memiliki anak \n\n";
                     if(item.parent.left!=null)
                     {
                         if(item.parent.left.data==item.data)
@@ -321,19 +321,19 @@ namespace ProyekSDL
                             item.parent.right=null;
                         }
                     }
-                    status+="Node deleted \n\n";
+                    status+=key+" Node deleted \n\n";
                 }
                 else if(item.left!=null)
                 {
                     status+=item.data+" memiliki anak kiri \n\n";
                     status+=item.left.data+" menggantikan posisi "+item.data+"\n\n";
-                    status+="Node deleted "+item.data+" \n\n";
+                    status+=item.data+"Node deleted "+" \n\n";
                 }
                 else if(item.right!=null)    
                 {
                     status+=item.data+" memiliki anak kanan \n\n";
                     status+=item.right.data+" menggantikan posisi "+item.data+"\n\n";
-                    status+="Node deleted "+item.data+" \n\n";
+                    status+=item.data+"Node deleted "+" \n\n";
                 }
 
                 if (item.left == null || item.right == null)
