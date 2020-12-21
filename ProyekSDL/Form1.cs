@@ -77,6 +77,12 @@ namespace ProyekSDL
                 {
                     //Red Black Tree
                     MessageBox.Show("rbt Insert to node with ***key: " + key + "*** the value: " + value);
+                    NodeR rbt = new NodeR(key, value);
+                    rbt.root = rbt.insert(rbt.root, key, value);
+                    rbt.status += "+++-----------------------------------------------------+++";
+                    rtbDisplay.Text += rbt.status + "\n\n";
+                    rbt.status = "";
+
                 }
                 else
                 {   //AVL Tree

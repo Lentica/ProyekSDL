@@ -4,37 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RedBlackTree
+namespace ProyekSDL
 {
     
     class NodeR
     {
         public int data;
         public NodeR parent;
+        public NodeR root;
         public NodeR left;
         public NodeR right;
         public int color;
+        public string value;
+        public string status;
         // 0 = Red
         // 1 = Black
 
-        public NodeR(int data)
+        public NodeR(int data, string value)
         {
             this.data = data;
-            left = right = parent = null;
+            this.value = value;
+            left = right = parent = root = null;
             color = 0;
         }
-    }
-    class Tree
-    {
-        public NodeR insert(NodeR root, int val)
+
+        public NodeR insert(NodeR root, int key, string val, string direction = "", int parentKey = 0)
         {
             if (root == null)
             {
-                root = new NodeR(val);
+                status += " key " + key + " has been inserted! \n\n";
+                status += " key " + key + " is a " + direction + " child of: >>" + parentKey + "<<\n\n";
+                root = new NodeR(key, val);
             }
-            else if (val < root.data)
+            else if (key < root.data)
             {
-                root.left = insert(root.left, val);
+                
+                root.left = insert(root.left, key, val);
                 root.left.parent = root;
                 if (root.left.color == root.color)
                 {
@@ -72,14 +77,14 @@ namespace RedBlackTree
                             recolorInsert(root);
                             recolorInsert(root.right);
                         }
-                        
+
                     }
                 }
             }
-            else if (val > root.data)
+            else if (key > root.data)
             {
                 // Lebih Besar
-                root.right = insert(root.right, val);
+                root.right = insert(root.right, key, val);
                 root.right.parent = root;
                 if (root.right.color == root.color)
                 {
@@ -133,7 +138,8 @@ namespace RedBlackTree
             else if (root.color == 1)
             {
                 root.color = 0;
-            }else if (root.parent == null)
+            }
+            else if (root.parent == null)
             {
                 root.color = 1;
             }
@@ -166,5 +172,9 @@ namespace RedBlackTree
             leftRotateInsert(root.left);
             rightRotateInsert(root);
         }
+    }
+    class Tree
+    {
+        
     }
 }
