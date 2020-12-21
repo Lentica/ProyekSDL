@@ -41,6 +41,7 @@ namespace ProyekSDL
                 string[] testCaseLines = System.IO.File.ReadAllLines(@fileOpener.FileName);
 
                 //array untuk memisah command, key, value dari setiap line
+                //0=perintah, 1=key, 2=value
                 string[] commands = new string[3];
 
                 //baca setiap line yg didapat dari text file dan
@@ -59,9 +60,9 @@ namespace ProyekSDL
                         operationModeSelector(mode, commands[0], int.Parse(commands[1]));
                     else if (commands[0] == "T")//traverse
                         operationModeSelector(mode, commands[0]);
-                    else if (commands[0] == "S")//search
+                    else if (commands[0] == "F")//find
                         operationModeSelector(mode, commands[0], int.Parse(commands[1]));
-                    else
+                    else //insert and update
                         operationModeSelector(mode, commands[0], int.Parse(commands[1]), commands[2]);
                 }
             }
@@ -76,6 +77,12 @@ namespace ProyekSDL
                 {
                     //Red Black Tree
                     MessageBox.Show("rbt Insert to node with ***key: " + key + "*** the value: " + value);
+                    NodeR rbt = new NodeR(key, value);
+                    rbt.root = rbt.insert(rbt.root, key, value);
+                    rbt.status += "+++-----------------------------------------------------+++";
+                    rtbDisplay.Text += rbt.status + "\n\n";
+                    rbt.status = "";
+
                 }
                 else
                 {   //AVL Tree
@@ -98,27 +105,33 @@ namespace ProyekSDL
                 }
                 else
                 {
-                    MessageBox.Show("avl Update node with key: " + key + " with the value: " + value);
+                    rtbDisplay.Text+="avl Update node with key: " + key + " with the value: " + value;
+                    avl.updateNode(avl.root, key, value);
                 }
             }
-            else if(command == "S")
+            else if(command == "F")
             {
                 //Search
                 if (mode == "rbt")
                 {
-                    MessageBox.Show("rbt Delete node with key: " + key);
+                    MessageBox.Show("rbt find node with key: " + key);
                 }
                 else
                 {
                     //AVL Tree
                     //MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
-                    rtbDisplay.Text += "avl search node with key: " + key + "\n";
-                    Node res = avl.find(avl.root, key);
-                    if (res == null) { rtbDisplay.Text += "key not found" + "\n"; }
-                    else
-                    {
-                        rtbDisplay.Text += "node found with key " + res.key + " and value = " + res.value  + "\n";
-                    }
+                    //rtbDisplay.Text += "avl find node with key: " + key + "\n";
+                    //Node res = avl.find(avl.root, key);
+                    //if (res == null) { rtbDisplay.Text += "key not found" + "\n"; }
+                    //else
+                    //{
+                    //    rtbDisplay.Text += "node found with key " + res.key + " and value = " + res.value  + "\n";
+                    //}
+                    rtbDisplay.Text += "avl find node with key: ***" + key + "\n\n";
+                    avl.findNode(avl.root, key);
+                    avl.status += "+++-----------------------------------------------------+++";
+                    rtbDisplay.Text += avl.status + "\n\n";
+                    avl.status = "";
                 }
             }
             else if (command == "D")
@@ -134,6 +147,9 @@ namespace ProyekSDL
                     //MessageBox.Show("avl Insert to node with key: " + key + " the value: " + value);
                     rtbDisplay.Text += "avl delete node with key: " + key + "\n";
                     avl.root = avl.deleteNode(avl.root, key);
+                    avl.status += "+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+";
+                    rtbDisplay.Text += avl.status + "\n\n";
+                    avl.status = "";
 
 
                     //Node res = avl.delete(avl.root, key);

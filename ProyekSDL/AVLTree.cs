@@ -47,7 +47,7 @@ namespace ProyekSDL
             return x;
         }
 
-        //Left rotate
+        //Left rotates
         public Node leftRotate(Node x)
         {
             Node y = x.right;
@@ -265,6 +265,7 @@ namespace ProyekSDL
 
         Node minValueNode(Node node)
         {
+            status += "finding current node's in-order successor... \n\n";
             Node current = node;
 
             //get the leftmost node
@@ -276,21 +277,27 @@ namespace ProyekSDL
 
         public Node deleteNode(Node root, int key)
         {
-            //bst delete
+            //standard bst delete
             if (root == null)
+            {
                 return root;
-
-            //if key<current key go left
+            }
+            //if key<current key recursively go down left
             if (key < root.key)
+            {
+                status += "key " + key + " is less than current node: "+root.key+", going left \n\n";
                 root.left = deleteNode(root.left, key);
-
-            //if key>current key go down right
+            }
+            //if key>current key recursively go down right
             else if (key > root.key)
+            {
+                status += "key " + key + " is less than current node: " + root.key + ", going left \n\n";
                 root.right = deleteNode(root.right, key);
-
+            }
             //if key=current key then delete
             else
             {
+                status += "key " + key + " has been found! deleting.. \n\n";
                 // node with only one child or no child  
                 if ((root.left == null) || (root.right == null))
                 {
@@ -303,23 +310,31 @@ namespace ProyekSDL
                     // No child case  
                     if (temp == null)
                     {
+                        status += "node with key: " + key + " has no child \n\n";
                         temp = root;
                         root = null;
                     }
-                    else // one child case  
+                    // one child case  
+                    else
+                    {
+                        status += "node with key: " + key + " only has one child \n\n";
                         root = temp; // copy non empty child
+                    }
                 }
+                // node with two children. get inorder successor
                 else
                 {
-
-                    // node with two children. get inorder successor
+                    status += "node with key: " + key + " has two childs \n\n";
                     Node temp = minValueNode(root.right);
 
+                    status += "in-order successor found: " + temp.key + " replacing node to be deleted.. \n\n";
+                    int tempKey = root.key;
                     // Copy the inorder succ data to this
                     root.key = temp.key;
 
                     // Delete the inorder successor  
                     root.right = deleteNode(root.right, temp.key);
+                    status += "key: "+tempKey+" has been deleted.. \n\n";
                 }
             }
 
@@ -357,6 +372,67 @@ namespace ProyekSDL
             }
 
             return root;
+        }
+
+        public Node updateNode(Node node, int key, string val)
+        {
+            if (node == null)
+            {
+                status += " key " + key + " was not found! >_< \n\n";
+                return node;
+            }
+
+            if (key < node.key)
+            {
+                status += " key " + key + " less than current node: " + node.key + ", going left \n\n";
+                node.left = updateNode(node.left, key, val);
+            }
+            else if (key > node.key)
+            {
+                status += " key " + key + " larger than current node: " + node.key + ", going right \n\n";
+                node.right = updateNode(node.right, key, val);
+
+            }
+            else
+            {
+                status += " key has been found!  \n\n";
+                string tempVal = node.value;
+                node.value = val;
+                status += " value of: "+node.key+" has been replaced \n\n";
+                status += " before: " + tempVal + " || after: "+node.value+"\n\n";
+                return node;
+            }
+
+            return node;
+        }
+        public Node findNode(Node node, int key)
+        {
+            if (node == null)
+            {
+                status += " key " + key + " was not found! >_< \n\n";
+                return node;
+            }
+
+            if (key < node.key)
+            {
+                status += " key " + key + " less than current node: " + node.key + ", going left \n\n";
+                node.left = findNode(node.left, key);
+            }
+            else if (key > node.key)
+            {
+                status += " key " + key + " larger than current node: " + node.key + ", going right \n\n";
+                node.right = findNode(node.right, key);
+
+            }
+            else
+            {
+                status += " key has been found!  \n\n";
+                string tempVal = node.value;
+                status +=" node's value: " + node.value + "\n\n";
+                return node;
+            }
+
+            return node;
         }
     }
 }

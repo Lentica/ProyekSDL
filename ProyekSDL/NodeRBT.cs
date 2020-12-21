@@ -279,7 +279,6 @@ namespace ProyekSDL
             }
             else
             {
-
                 NodeRBT Y = X.parent;
                 while (Y != null && X == Y.right)
                 {
