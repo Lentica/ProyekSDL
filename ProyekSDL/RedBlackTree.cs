@@ -339,51 +339,6 @@ namespace ProyekSDL
                     status+=item.right.data+" menggantikan posisi "+item.data+"\n\n";
                     status+=item.data+" Node deleted "+" \n\n";
                 }
-
-                if (item.left == null || item.right == null)
-                {
-                    Y = item;
-                }
-                else
-                {
-                    Y = TreeSuccessor(item);
-                }
-
-                if (Y.left != null)
-                {
-                    X = Y.left;
-                }
-                else
-                {
-                    X = Y.right;
-                }
-
-                if (X != null)
-                {
-                    X.parent = Y;
-                }
-
-                if (Y.parent == null)
-                {
-                    item.root = X;
-                }
-                else if (Y == Y.parent.left)
-                {
-                    Y.parent.left = X;
-                }
-                else
-                {
-                    Y.parent.left = X;
-                }   
-
-                if (Y != item)
-                {
-                    item.data = Y.data;
-                }
-                if (Y.color == 1)
-                {
-                    //DeleteFixUp(X);
-                }
             }
             
 
