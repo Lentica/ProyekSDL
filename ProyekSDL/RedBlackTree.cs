@@ -531,9 +531,34 @@ namespace ProyekSDL
                 Y.parent = X;
             }
         }
-    }
-    class Tree
-    {
-        
+
+        public NodeR update(NodeR node, int key, string val)
+        {
+            if (node == null)
+            {
+                status += " key " + key + " was not found! >_< \n\n";
+                return node;
+            }
+            else if (key < node.data)
+            {
+                status += " key " + key + " less than current node: " + node.data + ", going left \n\n";
+                update(node.left, key, val);
+            }
+            else if (key > node.data)
+            {
+                status += " key " + key + " larger than current node: " + node.data + ", going right \n\n";
+                update(node.right, key, val);
+            }
+            else
+            {
+                status += " key has been found!  \n\n";
+                string tempVal = node.value;
+                node.value = val;
+                status += " value of: " + node.data + " has been replaced \n\n";
+                status += " before: " + tempVal + " || after: " + node.value + "\n\n";
+                return node;
+            }
+            return node;
+        }
     }
 }
