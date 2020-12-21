@@ -34,7 +34,7 @@ namespace ProyekSDL
             {
                 status += " key " + key + " has been inserted! \n\n";
                 status += " key " + key + " is a " + direction + " child of: >>" + parentKey + "<<\n\n";
-                root = new NodeR(key, val);
+                return root = new NodeR(key, val);
             }
             else if (key < root.data)
             {
@@ -56,7 +56,7 @@ namespace ProyekSDL
                         else if (root.parent.left.color == root.color)
                         {
                             // Re-Color
-                            status += " Recolor \n\n";
+                            status += "Recolor \n\n";
                             recolorInsert(root.parent);
                             recolorInsert(root.parent.left);
                             recolorInsert(root.parent.right);

@@ -77,7 +77,7 @@ namespace ProyekSDL
                 if (mode == "rbt")
                 {
                     //Red Black Tree
-                    MessageBox.Show("rbt Insert to node with ***key: " + key + "*** the value: " + value);
+                    rtbDisplay.Text += "rbt Insert to node with ***key: " + key + "*** the value: " + value;
                     rbt.root = rbt.insert(rbt.root, key, value);
                     rbt.status += "+++-----------------------------------------------------+++";
                     rtbDisplay.Text += rbt.status + "\n\n";
