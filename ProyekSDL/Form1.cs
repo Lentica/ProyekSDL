@@ -116,7 +116,7 @@ namespace ProyekSDL
                 if (mode == "rbt")
                 {
                     MessageBox.Show("rbt find node with key: " + key + "\n\n");
-                    rbt.Find(rbt.root, key);
+                    rbt.Find(key);
                     rbt.status += "+++-----------------------------------------------------+++";
                     rtbDisplay.Text += rbt.status + "\n\n";
                     rbt.status = "";

@@ -173,7 +173,7 @@ namespace ProyekSDL
             rightRotateInsert(root);
         }
     
-        public NodeR Find(NodeR root,int key)
+        public NodeR Find(int key)
         {
             bool isFound = false;
             NodeR temp=root;
@@ -212,7 +212,7 @@ namespace ProyekSDL
 
         public void Delete(NodeR root,int key)
         {
-            NodeR item = Find(root,key);
+            NodeR item = Find(key);
             NodeR X = null;
             NodeR Y = null;
 
