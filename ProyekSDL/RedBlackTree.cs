@@ -34,13 +34,12 @@ namespace ProyekSDL
             {
                 status += " key " + key + " has been inserted! \n\n";
                 status += " key " + key + " is a " + direction + " child of: >>" + parentKey + "<<\n\n";
-
                 root = new NodeR(key, val);
-                
                 return root;
             }
             else if (key < root.data)
             {
+                //System.Windows.Forms.MessageBox.Show("Test<");
                 status += " key " + key + " less than current node: " + root.data + ", going left \n\n";
                 root.left = insert(root.left, key, val, "Left", root.data);
                 root.left.parent = root;
@@ -106,6 +105,7 @@ namespace ProyekSDL
             else if (key > root.data)
             {
                 // Lebih Besar
+                //System.Windows.Forms.MessageBox.Show("Test>");
                 status += " key " + key + " larger than current node: " + root.data + ", going right \n\n";
                 root.right = insert(root.right, key, val, "Right" , root.data);
                 root.right.parent = root;
@@ -197,10 +197,11 @@ namespace ProyekSDL
             NodeR temp;
             if (root == null)
             {
+                //System.Windows.Forms.MessageBox.Show("root null right rotate");
             }
             else if (root.right == null)
             {
-
+                //System.Windows.Forms.MessageBox.Show("root.right null right rotate");
             }
             else
             {
@@ -219,11 +220,11 @@ namespace ProyekSDL
             NodeR temp;
             if (root == null)
             {
-
+                //System.Windows.Forms.MessageBox.Show("root null left rotate");
             }
             else if (root.left == null)
             {
-
+                //System.Windows.Forms.MessageBox.Show("root.left null left rotate");
             }
             else
             {
