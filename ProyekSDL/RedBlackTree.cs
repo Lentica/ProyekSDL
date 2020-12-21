@@ -206,7 +206,11 @@ namespace ProyekSDL
         public void leftRotateInsert(NodeR root)
         {
             NodeR temp;
-            if (root.left == null)
+            if (root == null)
+            {
+
+            }
+            else if (root.left == null)
             {
 
             }
