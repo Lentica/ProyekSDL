@@ -114,7 +114,7 @@ namespace ProyekSDL
                 //Search
                 if (mode == "rbt")
                 {
-                    MessageBox.Show("rbt find node with key: " + key + "\n\n");
+                    rbt.status += "rbt find node with key: " + key + "\n\n";
                     rbt.Find(key);
                     rbt.status += "+++-----------------------------------------------------+++";
                     rtbDisplay.Text += rbt.status + "\n\n";
@@ -143,7 +143,7 @@ namespace ProyekSDL
                 //Delete
                 if (mode == "rbt")
                 {
-                    MessageBox.Show("rbt Delete node with key: " + key + "\n\n");
+                    rbt.status += "rbt Delete node with key: " + key + "\n\n";
                     rbt.Delete(key);
                     rbt.status += "+++-----------------------------------------------------+++";
                     rtbDisplay.Text += rbt.status + "\n\n";

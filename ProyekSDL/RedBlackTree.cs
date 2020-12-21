@@ -246,20 +246,23 @@ namespace ProyekSDL
                 {
                     break;
                 }
-                if (key < temp.data)
+                else
                 {
+                    if (key < temp.data)
+                    {
                     status+=" Turun ke kiri \n\n";
                     temp = temp.left;
-                }
-                if (key > temp.data)
-                {
+                    }
+                    else if (key > temp.data)
+                    {
                     status+=" Turun ke kanan \n\n";
                     temp = temp.right;
-                }
-                if (key == temp.data)
-                {
+                    }
+                    else if (key == temp.data)
+                    {
                     isFound = true;
                     item = root;
+                    }
                 }
             }
             if (isFound)
@@ -376,6 +379,10 @@ namespace ProyekSDL
 
                     NodeR W = X.parent.left;
 
+                    if(W==null)
+                    {
+                        return;
+                    }
                     if (W.color == 0)
                     {
                         W.color = 1;
