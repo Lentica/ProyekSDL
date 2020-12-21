@@ -39,7 +39,11 @@ namespace ProyekSDL
             }
             else if (key < root.data)
             {
-                //System.Windows.Forms.MessageBox.Show(root.data.ToString());
+                if (key == 243068)
+                {
+                    System.Windows.Forms.MessageBox.Show(key.ToString() + " < " + root.data.ToString() + " " + root.left.data.ToString());
+                }
+                
                 status += " key " + key + " less than current node: " + root.data + ", going left \n\n";
                 root.left = insert(root.left, key, val, "Left", root.data);
                 root.left.parent = root;
@@ -54,7 +58,7 @@ namespace ProyekSDL
                     {               
                         if (root.parent.left == null)
                         {
-                            leftRotateInsert(root);
+                            leftRotateInsert(root.parent);
                             status += "Left Rotate \n\n";
                         }
                         else if (root.parent.left.color == root.color)
@@ -69,7 +73,7 @@ namespace ProyekSDL
                         else
                         {
                             //  Triangle Rotate
-                            doubleLeftRotateInsert(root);
+                            doubleLeftRotateInsert(root.parent);
                             recolorInsert(root);
                             recolorInsert(root.left);
                             status += " Double Left Rotate \n\n";
@@ -79,7 +83,7 @@ namespace ProyekSDL
                     {
                         if (root.parent.right == null)
                         {
-                            rightRotateInsert(root);
+                            rightRotateInsert(root.parent);
                             status += " Right Rotate \n\n";
                         }
                         else if (root.parent.right.color == root.color)
@@ -93,7 +97,7 @@ namespace ProyekSDL
                         else
                         {
                             // Line Rotate
-                            rightRotateInsert(root);
+                            rightRotateInsert(root.parent);
                             recolorInsert(root);
                             recolorInsert(root.right);
                             status += "Right Rotate \n\n";
@@ -105,7 +109,6 @@ namespace ProyekSDL
             else if (key > root.data)
             {
                 // Lebih Besar
-                //System.Windows.Forms.MessageBox.Show(root.data.ToString());
                 status += " key " + key + " larger than current node: " + root.data + ", going right \n\n";
                 root.right = insert(root.right, key, val, "Right" , root.data);
                 root.right.parent = root;
@@ -120,7 +123,7 @@ namespace ProyekSDL
                     {
                         if (root.parent.right == null)
                         {
-                            rightRotateInsert(root);
+                            rightRotateInsert(root.parent);
                             status += "Right Rotate \n\n";
                         }
                         else if (root.parent.right.color == root.color)
@@ -135,7 +138,7 @@ namespace ProyekSDL
                         else
                         {
                             //  Triangle Rotate
-                            doubleRightRotateInsert(root);
+                            doubleRightRotateInsert(root.parent);
                             recolorInsert(root);
                             recolorInsert(root.right);
                             status += "Double Right Rotate \n\n";
@@ -145,7 +148,7 @@ namespace ProyekSDL
                     {
                         if (root.parent.left == null)
                         {
-                            leftRotateInsert(root);
+                            leftRotateInsert(root.parent);
                             status += "Left Rotate \n\n";
                         }
                         else if (root.parent.left.color == root.color)
@@ -159,7 +162,7 @@ namespace ProyekSDL
                         else
                         {
                             // Line Rotate
-                            leftRotateInsert(root);
+                            leftRotateInsert(root.parent);
                             recolorInsert(root);
                             recolorInsert(root.left);
                             status += "Left Rotate \n\n";
