@@ -22,6 +22,109 @@ namespace ProyekSDL
             color = 0;
         }
 
+        public void Insert(int item)
+        {
+            NodeRBT newItem = new NodeRBT(item);
+            if (root == null)
+            {
+                root = newItem;
+                root.color = 1;
+                return;
+            }
+            NodeRBT Y = null;
+            NodeRBT X = root;
+            while (X != null)
+            {
+                Y = X;
+                if (newItem.data < X.data)
+                {
+                    X = X.left;
+                }
+                else
+                {
+                    X = X.right;
+                }
+            }
+            newItem.parent = Y;
+            if (Y == null)
+            {
+                root = newItem;
+            }
+            else if (newItem.data < Y.data)
+            {
+                Y.left = newItem;
+            }
+            else
+            {
+                Y.right = newItem;
+            }
+            newItem.left = null;
+            newItem.right = null;
+            newItem.color = 0;
+            InsertFixUp(newItem);
+        }
+        private void InsertFixUp(NodeRBT item)
+        {
+            //Checks Red-Black Tree properties
+            while (item != root && item.parent.color == 1)
+            {
+                /*We have a violation*/
+                if (item.parent == item.parent.parent.left)
+                {
+                    NodeRBT Y = item.parent.parent.right;
+                    if (Y != null && Y.color == 1)//Case 1: uncle is red
+                    {
+                        item.parent.color = 0;
+                        Y.color = 0;
+                        item.parent.parent.color = 1;
+                        item = item.parent.parent;
+                    }
+                    else //Case 2: uncle is black
+                    {
+                        if (item == item.parent.right)
+                        {
+                            item = item.parent;
+                            LeftRotate(item);
+                        }
+                        //Case 3: recolour & rotate
+                    item.parent.color = 0;
+                    item.parent.parent.color = 1;
+                    RightRotate(item.parent.parent);
+                    }
+ 
+                }
+                else
+                {
+                    //mirror image of code above
+                    NodeRBT X = null;
+ 
+                    X = item.parent.parent.left;
+                    if (X != null && X.color == 1)//Case 1
+                    {
+                         item.parent.color = 0;
+                         X.color = 1;
+                         item.parent.parent.color = 0;
+                         item = item.parent.parent;
+                    }
+                    else //Case 2
+                    {
+                        if (item == item.parent.left)
+                        {
+                            item = item.parent;
+                            RightRotate(item);
+                        }
+                        //Case 3: recolour & rotate
+                    item.parent.color = 1;
+                    item.parent.parent.color = 0;
+                    LeftRotate(item.parent.parent);
+ 
+                    }
+ 
+                }
+                root.color = 1;//re-colour the root black as necessary
+            }
+        }
+
         private void LeftRotate(NodeRBT X)
         {
             NodeRBT Y = X.right;
