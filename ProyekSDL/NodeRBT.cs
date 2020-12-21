@@ -8,12 +8,12 @@ namespace ProyekSDL
 {
     class NodeRBT
     {
-        int data;
-        NodeRBT parent;
-        NodeRBT root;
-        NodeRBT left;
-        NodeRBT right;
-        int color;
+        public int data;
+        public NodeRBT parent;
+        public NodeRBT root;
+        public NodeRBT left;
+        public NodeRBT right;
+        public int color;
 
         public NodeRBT(int data)
         {
