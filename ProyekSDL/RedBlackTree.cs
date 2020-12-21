@@ -276,7 +276,7 @@ namespace ProyekSDL
                     else if (key == temp.data)
                     {
                     isFound = true;
-                    item = root;
+                    item = temp;
                     }
                 }
             }
@@ -297,57 +297,90 @@ namespace ProyekSDL
             NodeR item = Find(key);
             NodeR X = null;
             NodeR Y = null;
-
             if (item == null)
             {
                 status+=" Nothing to delete! " + "\n\n";
                 return;
             }
-            else if (root.left == null || root.right == null)
-            {
-                Y = item;
-            }
             else
             {
-                Y = TreeSuccessor(item);
-            }
+                if(item.left==null&&item.right==null)
+                {                    
+                    status+=item.data+" tidak memiliki anak dan berwarna Merah \n\n";
+                    if(item.parent.left!=null)
+                    {
+                        if(item.parent.left.data==item.data)
+                        {
+                            item.parent.left=null;
+                        }
+                    }
+                    if(item.parent.right!=null)
+                    {
+                        if(item.parent.right.data==item.data)
+                        {
+                            item.parent.right=null;
+                        }
+                    }
+                    status+="Node deleted \n\n";
+                }
+                else if(item.left!=null)
+                {
+                    status+=item.data+" memiliki anak kiri \n\n";
+                    status+="Node deleted "+item.data+" \n\n";
+                }
+                else if(item.right!=null)    
+                {
+                    status+=item.data+" memiliki anak kanan \n\n";
+                    status+="Node deleted "+item.data+" \n\n";
+                }
 
-            if (Y.left != null)
-            {
-                X = Y.left;
-            }
-            else
-            {
-                X = Y.right;
-            }
+                if (item.left == null || item.right == null)
+                {
+                    Y = item;
+                }
+                else
+                {
+                    Y = TreeSuccessor(item);
+                }
 
-            if (X != null)
-            {
-                X.parent = Y;
-            }
+                if (Y.left != null)
+                {
+                    X = Y.left;
+                }
+                else
+                {
+                    X = Y.right;
+                }
 
-            if (Y.parent == null)
-            {
-                item.root = X;
-            }
-            else if (Y == Y.parent.left)
-            {
-                Y.parent.left = X;
-            }
-            else
-            {
-                Y.parent.left = X;
-            }
+                if (X != null)
+                {
+                    X.parent = Y;
+                }
 
-            if (Y != item)
-            {
-                item.data = Y.data;
+                if (Y.parent == null)
+                {
+                    root = X;
+                }
+                else if (Y == Y.parent.left)
+                {
+                    Y.parent.left = X;
+                }
+                else
+                {
+                    Y.parent.left = X;
+                }   
+
+                if (Y != item)
+                {
+                    item.data = Y.data;
+                }
+                if (Y.color == 1)
+                {
+                    //DeleteFixUp(X);
+                }
             }
-            if (Y.color == 1)
-            {
-                status += " Node Deleted" + "\n\n";
-                DeleteFixUp(X);
-            }
+            
+
 
         }
     
@@ -356,70 +389,69 @@ namespace ProyekSDL
 
             while (X != null && X != root && X.color == 1)
             {
-
                 if (X == X.parent.left)
                 {
-
                     NodeR W = X.parent.right;
+                    
+                        if (W.color == 0)
+                        {
+                            W.color = 1;
+                            X.parent.color = 0;
+                            LeftRotate(X.parent);
+                            W = X.parent.right;
+                        }
 
-                    if (W.color == 0)
-                    {
-                        W.color = 1;
-                        X.parent.color = 0;
+                        if (W.left.color == 1 && W.right.color == 1)
+                        {
+                            W.color = 0;
+                            X = X.parent;
+                        }
+                        else if (W.right.color == 1&&W.right!=null)
+                        {
+                            W.left.color = 1;
+                            W.color = 0;
+                            RightRotate(W);
+                            W = X.parent.right;
+                        }
+
+                        W.color = X.parent.color;
+                        X.parent.color = 1;
+                        W.right.color = 1;
                         LeftRotate(X.parent);
-                        W = X.parent.right;
-                    }
-
-                    if (W.left.color == 1 && W.right.color == 1)
-                    {
-                        W.color = 0;
-                        X = X.parent;
-                    }
-                    else if (W.right.color == 1)
-                    {
-                        W.left.color = 1;
-                        W.color = 0;
-                        RightRotate(W);
-                        W = X.parent.right;
-                    }
-
-                    W.color = X.parent.color;
-                    X.parent.color = 1;
-                    W.right.color = 1;
-                    LeftRotate(X.parent);
-                    X = root;
+                        X = root;
+                    
                 }
                 else
                 {
-
                     NodeR W = X.parent.left;
                     
-                    if (W.color == 0)
-                    {
-                        W.color = 1;
-                        X.parent.color = 0;
+                        if (W.color == 0)
+                        {
+                            W.color = 1;
+                            X.parent.color = 0;
+                            RightRotate(X.parent);
+                            W = X.parent.left;
+                        }
+
+                        if (W.right.color == 1 && W.left.color == 1)
+                        {
+                            W.color = 1;
+                            X = X.parent;
+                        }
+                        else if (W.left.color == 1)
+                        {
+                            W.right.color = 1;
+                            W.color = 0;
+                            LeftRotate(W);
+                            W = X.parent.left;
+                        }
+
+                        W.color = X.parent.color;
+                        X.parent.color = 1;
+                        W.left.color = 1;
                         RightRotate(X.parent);
-                        W = X.parent.left;
-                    }
-
-                    if (W.right.color == 1 && W.left.color == 1)
-                    {
-                        W.color = 1;
-                        X = X.parent;
-                    }
-                    else if (W.left.color == 1)
-                    {
-                        W.right.color = 1;
-                        W.color = 0;
-                        LeftRotate(W);
-                        W = X.parent.left;
-                    }
-
-                    W.color = X.parent.color;
-                    X.parent.color = 1;
-                    W.left.color = 1;
-                    RightRotate(X.parent);
-                    X = root;
+                        X = root;
+                    
                 }
             }
             if (X != null)
@@ -450,7 +482,7 @@ namespace ProyekSDL
 
             if (X.left != null)
             {
-
+                status+= Minimum(X).data+" adalah successor";
                 return Minimum(X);
 
             }
@@ -462,7 +494,7 @@ namespace ProyekSDL
                     X = Y;
                     Y = Y.parent;
                 }
-
+                status+=Y.data+" adalah successor \n\n";
                 return Y;
             }
         }
