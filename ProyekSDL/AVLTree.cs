@@ -12,7 +12,7 @@ namespace ProyekSDL
         public Node root;
         public string status;
 
-        //Mendapatkan height tree
+        //Mendapatkan height tree, digunakan untuk menghitung balance
         public int height(Node N)
         {
             if (N == null)
@@ -219,7 +219,7 @@ namespace ProyekSDL
             }
 
 
-            //update height of ancestor
+            //update height of node ancestor
             node.height = 1 + max(height(node.left),
                                 height(node.right));
 
