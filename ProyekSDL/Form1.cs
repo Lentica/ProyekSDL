@@ -102,6 +102,8 @@ namespace ProyekSDL
                 if (mode == "rbt")
                 {
                     //MessageBox.Show("rbt Update node with key: " + key + " with the value: " + value);
+                    rtbDisplay.Text += "rbt Update node with key: " + key + " with the value: " + value;
+                    rbt.update(rbt.root, key, value);
                 }
                 else
                 {
