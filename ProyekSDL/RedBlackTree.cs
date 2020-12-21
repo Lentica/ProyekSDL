@@ -38,16 +38,25 @@ namespace ProyekSDL
             }
             else if (key < root.data)
             {
-                
-                root.left = insert(root.left, key, val);
+                status += " key " + key + " less than current node: " + root.data + ", going left \n\n";
+                root.left = insert(root.left, key, val, "Left", root.data);
                 root.left.parent = root;
                 if (root.left.color == root.color)
                 {
-                    if (root.parent.left != root)
+                    if (root.parent == null)
                     {
-                        if (root.parent.left.color == root.color)
+
+                    }
+                    else if (root.parent.left != root)
+                    {
+                        if (root.parent.left == null)
+                        {
+
+                        }
+                        else if (root.parent.left.color == root.color)
                         {
                             // Re-Color
+                            status += " Recolor \n\n";
                             recolorInsert(root.parent);
                             recolorInsert(root.parent.left);
                             recolorInsert(root.parent.right);
@@ -63,7 +72,11 @@ namespace ProyekSDL
                     }
                     else
                     {
-                        if (root.parent.right.color == root.color)
+                        if (root.parent.right == null)
+                        {
+
+                        }
+                        else if (root.parent.right.color == root.color)
                         {
                             recolorInsert(root.parent);
                             recolorInsert(root.parent.left);
@@ -73,6 +86,7 @@ namespace ProyekSDL
                         else
                         {
                             // Line Rotate
+                            
                             rightRotateInsert(root);
                             recolorInsert(root);
                             recolorInsert(root.right);
@@ -84,13 +98,22 @@ namespace ProyekSDL
             else if (key > root.data)
             {
                 // Lebih Besar
-                root.right = insert(root.right, key, val);
+                status += " key " + key + " larger than current node: " + root.data + ", going right \n\n";
+                root.right = insert(root.right, key, val, "Right" , root.data);
                 root.right.parent = root;
                 if (root.right.color == root.color)
                 {
-                    if (root.parent.right != root)
+                    if (root.parent == null)
                     {
-                        if (root.parent.right.color == root.color)
+
+                    }
+                    else if (root.parent.right != root)
+                    {
+                        if (root.parent.right == null)
+                        {
+
+                        }
+                        else if (root.parent.right.color == root.color)
                         {
                             // Re-Color
                             recolorInsert(root.parent);
@@ -108,7 +131,11 @@ namespace ProyekSDL
                     }
                     else
                     {
-                        if (root.parent.left.color == root.color)
+                        if (root.parent.left == null)
+                        {
+
+                        }
+                        else if (root.parent.left.color == root.color)
                         {
                             recolorInsert(root.parent);
                             recolorInsert(root.parent.left);
@@ -131,7 +158,11 @@ namespace ProyekSDL
 
         public void recolorInsert(NodeR root)
         {
-            if (root.color == 0)
+            if (root == null)
+            {
+
+            }
+            else if (root.color == 0)
             {
                 root.color = 1;
             }
@@ -147,18 +178,37 @@ namespace ProyekSDL
 
         public void leftRotateInsert(NodeR root)
         {
-            NodeR temp = root.right;
-            root.right = temp.left;
-            temp.left = root;
-            root = temp;
+            NodeR temp;
+            if (root.right == null)
+            {
+
+            }
+            else
+            {
+                temp = root.right;
+                root.right = temp.left;
+                temp.left = root;
+                root = temp;
+            }
+            
+            
         }
 
         public void rightRotateInsert(NodeR root)
         {
-            NodeR temp = root.left;
-            root.left = temp.right;
-            temp.right = root;
-            root = temp;
+            NodeR temp;
+            if (root.left == null)
+            {
+
+            }
+            else
+            {
+                temp = root.left;
+                root.left = temp.right;
+                temp.right = root;
+                root = temp;
+            }
+                
         }
 
         public void doubleLeftRotateInsert(NodeR root)

@@ -13,6 +13,7 @@ namespace ProyekSDL
     public partial class Form1 : Form
     {
         AVLTree avl;
+        NodeR rbt = new NodeR(1, "");
         public Form1()
         {
             InitializeComponent();
@@ -77,7 +78,6 @@ namespace ProyekSDL
                 {
                     //Red Black Tree
                     MessageBox.Show("rbt Insert to node with ***key: " + key + "*** the value: " + value);
-                    NodeR rbt = new NodeR(key, value);
                     rbt.root = rbt.insert(rbt.root, key, value);
                     rbt.status += "+++-----------------------------------------------------+++";
                     rtbDisplay.Text += rbt.status + "\n\n";
