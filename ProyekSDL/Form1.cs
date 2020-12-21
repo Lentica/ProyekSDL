@@ -144,7 +144,7 @@ namespace ProyekSDL
                 if (mode == "rbt")
                 {
                     MessageBox.Show("rbt Delete node with key: " + key + "\n\n");
-                    rbt.Delete(rbt.root, key);
+                    rbt.Delete(key);
                     rbt.status += "+++-----------------------------------------------------+++";
                     rtbDisplay.Text += rbt.status + "\n\n";
                     rbt.status = "";

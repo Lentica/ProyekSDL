@@ -274,7 +274,7 @@ namespace ProyekSDL
             }
         }
 
-        public void Delete(NodeR root,int key)
+        public void Delete(int key)
         {
             NodeR item = Find(key);
             NodeR X = null;
@@ -285,8 +285,7 @@ namespace ProyekSDL
                 status+=" Nothing to delete! " + "\n\n";
                 return;
             }
-
-            if (root.left == null || root.right == null)
+            else if (root.left == null || root.right == null)
             {
                 Y = item;
             }
@@ -311,7 +310,7 @@ namespace ProyekSDL
 
             if (Y.parent == null)
             {
-                root = X;
+                item.root = X;
             }
             else if (Y == Y.parent.left)
             {
